@@ -42,34 +42,21 @@
             <div class="col-4">
                 <div style="margin-left: 25%">
                     <label for="selected">Choix compte</label>
-                    <select class="form-control" v-model="user.name" style="width: 60%" v-on:change='fetchData'>
-                        <option disabled value="">Comptes</option>
-                        <option>Killy85</option>
-                        <option>Nair0fl</option>
-                        <option>raphaelCharre</option>
-                        <option>mathiasLoiret</option>
-                        <option>thomaspich</option>
-                        <option>TeofiloJ</option>
-                        <option>Grigusky</option>
-                        <option>Dakistos</option>
-                        <option>mael61</option>
-                        <option>KevinPautonnier</option>
-                        <option>BenoitCochet</option>
-                        <option>sfongue</option>
-                        <option>ClementCaillaud</option>
-                        <option>gfourny</option>
-                        <option>Mokui</option>
-                        <option>LordInateur</option>
-                        <option>AntoineGOSSET</option>
-                        <option>etienneYnov</option>
-                        <option>Coblestone</option>
-                        <option>AlexDesvallees</option>
-                        <option>rudy8530</option>
-                        <option>benjaminbra</option>
-                        <option>mael61</option>
-                        <option>alixnzt</option>
-                    </select>
-                    <span>Sélectionné : {{ user.name }} </span>
+
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Comptes
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                            <div v-for="project in projects" v-on:change="fetchData">
+                                    <input type="checkbox" :id="project.owner.login" :value="project.owner.login" v-model="checkedNames">
+                                    <label :for="project.owner.login">{{project.owner.login}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <span>Sélectionné : {{ checkedNames }} </span>
                 </div>
             </div>
         </div>
@@ -77,16 +64,16 @@
             <div class="col-12">
                 <div class="alert alert-primary" role="alert">
                     <span>
-                        nom prenom
+                        {{user.fullName}}
                     </span>
                     <span style="float: right;">
-                        lienGithub
+                        {{user.github}}
                     </span>
                 </div>
             </div>
         </div>
         <div>
-            <div>
+            <div v-for="user in checkedNames">
                 <h1 class="text-center">Derniers commits {{repository.name}}</h1>
                 <template v-for="branch in branches">
                     <input type="radio" :id="branch" :value="branch" name="branch" v-model="currentBranch">
