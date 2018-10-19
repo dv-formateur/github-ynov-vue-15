@@ -22,23 +22,13 @@ var app = new Vue({
     data: {
         branches: ['master'],
         currentBranch: 'master',
-        commits: null,
 
-        user: {
-            name: '',
-            fullName: '',
-            github: ''
-        },
+        users: [],
         repository: {
             name: ''
         },
-
         projects: [],
         checkedNames: []
-    },
-
-    created: function () {
-        this.fetchData()
     },
 
     watch: {
@@ -57,35 +47,50 @@ var app = new Vue({
 
     methods: {
         fetchData: function () {
-            if (this.user.name != null && this.repository.name != null) {
-
+            vm = this
+            if (this.checkedNames.length > 0) {
 
                 var data
+                vm.users = []
 
                 this.checkedNames.forEach(element => {
-                    this.user.name = element
-                    var userNameUrl = 'https://api.github.com/users/' + this.user.name + ''
+
+                    var person = {
+                        fullName: '',
+                        github: '',
+                        name: '',
+                        commits: '',
+                    }
+
+
+                    var userNameUrl = 'https://api.github.com/users/' + element + ''
+
+
                     var request = new XMLHttpRequest()
-                    var that = this
                     request.open('GET', userNameUrl)
                     request.setRequestHeader('Authorization', 'Basic Zm91cm55LmdAZnJlZS5mcjpmb3VybnkzNw==')
                     request.onload = function () {
                         data = JSON.parse(request.responseText)
-                        that.user.fullName = data.name
-                        that.user.github = data.html_url
+                        person.fullName = data.name
+                        person.github = data.html_url
+                        person.name = element
                     }
                     request.send()
 
-                    var apiURL = 'https://api.github.com/repos/' + this.user.name + '/' + this.repository.name + '/commits?per_page=3&sha='
+
+
+                    var apiURL = 'https://api.github.com/repos/' + element + '/' + this.repository.name + '/commits?per_page=3&sha='
                     var xhr = new XMLHttpRequest()
                     var self = this
                     xhr.open('GET', apiURL + self.currentBranch)
                     xhr.setRequestHeader('Authorization', 'Basic Zm91cm55LmdAZnJlZS5mcjpmb3VybnkzNw==')
                     xhr.onload = function () {
-                        self.commits = JSON.parse(xhr.responseText)
+                        person.commits = JSON.parse(xhr.responseText)
                     }
                     xhr.send()
-                });
+                    vm.users.push(person)
+                    
+                })
             }
         }
     },
