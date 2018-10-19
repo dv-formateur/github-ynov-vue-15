@@ -1,0 +1,10 @@
+.nav{
+    background-color: #ff881d;
+}
+
+.nav-link{
+    color: #3F51B5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
