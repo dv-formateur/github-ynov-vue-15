@@ -17,55 +17,96 @@
             <a class="nav-link active" href="#">App Github Ynov</a>
         </li>
     </ul>
-    <div class="row" style="margin-top: 3%">
-        <div class="col-4">
-            <div class="form-group" style="margin-left: 25%">
-                <label for="exampleFormControlSelect1">Choix projet</label>
-                <select class="form-control" id="exampleFormControlSelect1" style="width: 25%">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
+    <div id="app">
+        <div class="row" style="margin-top: 3%">
+            <div class="col-4">
+                <div style="margin-left: 25%">
+                    <label for="FormControlProject">Choix projet</label>
+                    <select class="form-control" v-model="repository.name" style="width: 25%" v-on:change='fetchData'>
+                        <option disabled value="">Projets</option>
+                        <option>
+                            github-ynov-vue
+                        </option>
+                    </select>
+                    <span>Sélectionné : {{ repository.name }}</span>
+                </div>
             </div>
-        </div>
-        <div class="col-4">
-            <div class="form-group" style="margin-left: 25%">
-                <label for="datepicker">Choix période</label>
-                <div>
-                    <input id="datepicker" type="text" name="datefilter" value="Choix période" style="width: 60%" />
+            <div class="col-4">
+                <div class="form-group" style="margin-left: 25%">
+                    <label for="datepicker">Choix période</label>
+                    <div>
+                        <input id="datepicker" type="text" name="datefilter" value="Choix période" style="width: 60%" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div style="margin-left: 25%">
+                    <label for="selected">Choix compte</label>
+                    <select class="form-control" v-model="user.name" style="width: 60%" v-on:change='fetchData'>
+                        <option disabled value="">Comptes</option>
+                        <option>Killy85</option>
+                        <option>Nair0fl</option>
+                        <option>raphaelCharre</option>
+                        <option>mathiasLoiret</option>
+                        <option>thomaspich</option>
+                        <option>TeofiloJ</option>
+                        <option>Grigusky</option>
+                        <option>Dakistos</option>
+                        <option>mael61</option>
+                        <option>KevinPautonnier</option>
+                        <option>BenoitCochet</option>
+                        <option>sfongue</option>
+                        <option>ClementCaillaud</option>
+                        <option>gfourny</option>
+                        <option>Mokui</option>
+                        <option>LordInateur</option>
+                        <option>AntoineGOSSET</option>
+                        <option>etienneYnov</option>
+                        <option>Coblestone</option>
+                        <option>AlexDesvallees</option>
+                        <option>rudy8530</option>
+                        <option>benjaminbra</option>
+                        <option>mael61</option>
+                        <option>alixnzt</option>
+                    </select>
+                    <span>Sélectionné : {{ user.name }} </span>
                 </div>
             </div>
         </div>
-        <div class="col-4">
-            <div class="form-group" style="margin-left: 25%">
-                <label for="exampleFormControlSelect1">Choix compte</label>
-                <select class="form-control" id="exampleFormControlSelect1" style="width: 50%">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-primary" role="alert">
+                    <span>
+                        nom prenom
+                    </span>
+                    <span style="float: right;">
+                        lienGithub
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="alert alert-primary" role="alert">
-                <span>
-                    {{nom}} {{prenom}}
-                </span>
-                <span style="float: right;">
-                    {{lienGithub}}
-                </span>
+        <div>
+            <div>
+                <h1 class="text-center">Derniers commits {{repository.name}}</h1>
+                <template v-for="branch in branches">
+                    <input type="radio" :id="branch" :value="branch" name="branch" v-model="currentBranch">
+                    <label :for="branch">{{ branch }}</label>
+                </template>
+                <p>{{user.name}}/{{repository.name}}@{{ currentBranch }}</p>
+                <ul>
+                    <li v-for="record in commits">
+                        <a :href="record.html_url" target="_blank" class="commit">{{ record.sha.slice(0, 7) }}</a>
+                        - <span class="message">{{ record.commit.message | truncate }}</span><br>
+                        by <span class="author"><a :href="record.author.html_url" target="_blank">{{
+                                record.commit.author.name }}</a></span>
+                        at <span class="date">{{ record.commit.author.date | formatDate }}</span>
+                    </li>
+                </ul>
             </div>
+            Commit sur la période
         </div>
     </div>
-    <div>
-        Commit sur la période
-    </div>
+
 
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -77,7 +118,6 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="app.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
