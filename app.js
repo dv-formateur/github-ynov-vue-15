@@ -1,20 +1,3 @@
-$(function () {
-    $('input[name="datefilter"]').daterangepicker({
-        autoUpdateInput: false,
-        locale: {
-            cancelLabel: 'Clear'
-        }
-    });
-
-    $('input[name="datefilter"]').on('apply.daterangepicker', function (ev, picker) {
-        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-    });
-
-    $('input[name="datefilter"]').on('cancel.daterangepicker', function (ev, picker) {
-        $(this).val('');
-    });
-});
-
 var app = new Vue({
 
     el: '#app',
@@ -29,10 +12,7 @@ var app = new Vue({
         },
         projects: [],
         checkedNames: [],
-        date: {
-            startDate: '',
-            endDate: '',
-        }
+        startDate: ''
     },
 
     watch: {
@@ -52,10 +32,12 @@ var app = new Vue({
     methods: {
         fetchData: function () {
             vm = this
+            date = (new Date(this.startDate).getTime()/1000)
             if (this.checkedNames.length > 0) {
 
                 var data
                 vm.users = []
+                
 
                 this.checkedNames.forEach(element => {
 
@@ -83,7 +65,7 @@ var app = new Vue({
 
 
 
-                    var apiURL = 'https://api.github.com/repos/' + element + '/' + this.repository.name + '/commits?per_page=3&sha='
+                    var apiURL = 'https://api.github.com/repos/' + element + '/' + this.repository.name + '/commits?since='+date+''
                     var xhr = new XMLHttpRequest()
                     var self = this
                     xhr.open('GET', apiURL + self.currentBranch)

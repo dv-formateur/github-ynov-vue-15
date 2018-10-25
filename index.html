@@ -19,7 +19,7 @@
     </ul>
     <div id="app">
         <div class="row" style="margin-top: 3%">
-            <div class="col-4">
+            <div class="col-sm-12 col-md-4">
                 <div style="margin-left: 25%">
                     <label for="FormControlProject">Choix projet</label>
                     <select class="form-control" v-model="repository.name" style="width: 25%" v-on:change='fetchData'>
@@ -31,15 +31,18 @@
                     <span>Sélectionné : {{ repository.name }}</span>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-sm-12 col-md-4">
                 <div class="form-group" style="margin-left: 25%">
                     <label for="datepicker">Choix période</label>
-                    <div>
-                        <input id="datepicker" type="text" name="datefilter" value="Choix période" style="width: 60%" />
-                    </div>
+                    <div class="form-group row">
+                        <label for="example-date-input" class="col-2 col-form-label">Date</label>
+                        <div class="col-10">
+                          <input class="form-control" type="date" value="2011-08-19" v-model="startDate" v-on:change='fetchData'>
+                        </div>
+                      </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-sm-12 col-md-4">
                 <div style="margin-left: 25%">
                     <label for="selected">Choix compte</label>
 
