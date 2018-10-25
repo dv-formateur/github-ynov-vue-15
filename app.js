@@ -28,7 +28,11 @@ var app = new Vue({
             name: ''
         },
         projects: [],
-        checkedNames: []
+        checkedNames: [],
+        date: {
+            startDate: '',
+            endDate: '',
+        }
     },
 
     watch: {
