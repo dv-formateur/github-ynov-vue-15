@@ -22,19 +22,18 @@
             <div class="col-sm-12 col-md-4">
                 <div style="margin-left: 25%">
                     <label for="FormControlProject">Choix projet</label>
-                    <select class="form-control" v-model="repository.name" style="width: 25%" v-on:change='fetchData'>
+                    <select class="form-control" v-model="repository.name" style="width: 50%" v-on:change='fetchData'>
                         <option disabled value="">Projets</option>
                         <option>
                             github-ynov-vue
                         </option>
                     </select>
-                    <span>Sélectionné : {{ repository.name }}</span>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="form-group" style="margin-left: 25%">
+                <div class="form-group" style="margin-left: 25%; margin-top: 6%">
                     <div class="form-group row">
-                        <label for="example-date-input" class="col-2 col-form-label">Date</label>
+                        <label for="form-control" class="col-2 col-form-label">Date</label>
                         <input class="form-control" type="date" value="2011-08-19" v-model="startDate" v-on:change='fetchData' style="width: 50%">
                     </div>
                 </div>
@@ -56,7 +55,6 @@
                             </div>
                         </div>
                     </div>
-                    <span>Sélectionné : {{ checkedNames }} </span>
                 </div>
             </div>
         </div>
@@ -83,6 +81,7 @@
                     <p>{{person.name}}/{{repository.name}}@{{ currentBranch }}</p>
                     <ul>
                         <li v-for="record in person.commits">
+                            <img :src="record.author.avatar_url" width="5%"/>
                             <a :href="record.html_url" target="_blank" class="commit">{{ record.sha.slice(0, 7) }}</a>
                             - <span class="message">{{ record.commit.message | truncate }}</span><br>
                             by <span class="author"><a :href="record.author.html_url" target="_blank">{{
@@ -91,7 +90,6 @@
                         </li>
                     </ul>
                 </div>
-                Commit sur la période
             </div>
         </div>
 

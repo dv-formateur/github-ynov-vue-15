@@ -1,10 +1,15 @@
 .nav{
-    background-color: #ff881d;
+    background-color: #25292E;
 }
 
 .nav-link{
-    color: #3F51B5;
+    color: rgb(255, 255, 255);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 18px;
     font-weight: bold;
+}
+
+.alert-primary{
+    background-color: rgba(36,112,160,1);
+    color: white
 }
