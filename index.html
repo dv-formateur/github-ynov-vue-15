@@ -69,7 +69,8 @@
                                 <img src="assets/readme-img.svg" width="40px" height="auto">
                         </span>
                         <span style="float: right;">
-                            {{person.github}}
+                            <a :href="'https://github.com/' + person.name">
+                                {{person.github}}
                         </span>
                     </div>
                 </div>
