@@ -46,6 +46,7 @@ var app = new Vue({
                         github: '',
                         name: '',
                         commits: '',
+                        readme: ''
                     }
 
 
@@ -71,7 +72,9 @@ var app = new Vue({
                     xhr.open('GET', apiURL + self.currentBranch)
                     xhr.setRequestHeader('Authorization', 'Basic Zm91cm55LmdAZnJlZS5mcjpmb3VybnkzNw==')
                     xhr.onload = function () {
-                        person.commits = JSON.parse(xhr.responseText)
+                        data = JSON.parse(xhr.responseText)
+                        person.commits = data
+                        person.readme = data[0].html_url
                     }
                     xhr.send()
                     vm.users.push(person)

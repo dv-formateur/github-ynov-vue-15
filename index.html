@@ -65,6 +65,8 @@
                     <div class="alert alert-primary" role="alert">
                         <span>
                             {{person.fullName}}
+                            <a :href="'https://github.com/' + person.readme.split('/')[3] + '/' + repository.name + '/blob/master/README.md'">
+                                <img src="assets/readme-img.svg" width="40px" height="auto">
                         </span>
                         <span style="float: right;">
                             {{person.github}}
@@ -87,6 +89,7 @@
                             by <span class="author"><a :href="record.author.html_url" target="_blank">{{
                                     record.commit.author.name }}</a></span>
                             at <span class="date">{{ record.commit.author.date | formatDate }}</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
