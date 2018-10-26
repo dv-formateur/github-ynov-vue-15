@@ -18,9 +18,9 @@
         </li>
     </ul>
     <div id="app">
-        <div class="row" style="margin-top: 3%">
+        <div class="row" id="div-row">
             <div class="col-sm-12 col-md-4">
-                <div style="margin-left: 25%">
+                <div id="div-projet">
                     <label for="FormControlProject">Choix projet</label>
                     <select class="form-control" v-model="repository.name" style="width: 50%" v-on:change='fetchData'>
                         <option disabled value="">Projets</option>
@@ -31,15 +31,16 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div class="form-group" style="margin-left: 25%; margin-top: 6%">
+                <div id="div-date" class="form-group">
+                    <label for="form-control">Date</label>
                     <div class="form-group row">
-                        <label for="form-control" class="col-2 col-form-label">Date</label>
-                        <input class="form-control" type="date" value="2011-08-19" v-model="startDate" v-on:change='fetchData' style="width: 50%">
+                        <input class="form-control" type="date" value="2011-08-19" v-model="startDate" v-on:change='fetchData'
+                            style="width: 50%">
                     </div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-4">
-                <div style="margin-left: 25%">
+                <div id="div-compte">
                     <label for="selected">Choix compte</label>
 
                     <div class="dropdown">
@@ -81,7 +82,7 @@
                     <p>{{person.name}}/{{repository.name}}@{{ currentBranch }}</p>
                     <ul>
                         <li v-for="record in person.commits">
-                            <img :src="record.author.avatar_url" width="5%"/>
+                            <img :src="record.author.avatar_url" width="5%" />
                             <a :href="record.html_url" target="_blank" class="commit">{{ record.sha.slice(0, 7) }}</a>
                             - <span class="message">{{ record.commit.message | truncate }}</span><br>
                             by <span class="author"><a :href="record.author.html_url" target="_blank">{{

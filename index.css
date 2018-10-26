@@ -2,6 +2,22 @@
     background-color: #25292E;
 }
 
+#div-row{
+    margin-top: 3%;
+}
+
+#div-projet{
+    margin-left: 25%;
+}
+
+#div-date{
+    margin-left: 25%;
+}
+
+#div-compte{
+    margin-left: 25%;
+}
+
 .nav-link{
     color: rgb(255, 255, 255);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,4 +28,26 @@
 .alert-primary{
     background-color: rgba(36,112,160,1);
     color: white
+}
+
+.nav-item{
+    margin-left: 45%
+}
+
+@media screen and (max-width: 600px){
+    .nav-item{
+        margin-left: 30%;
+    }
+
+    #div-projet{
+        margin-left: 3%;
+    }
+    
+    #div-date{
+        margin-left: 7%;
+    }
+    
+    #div-compte{
+        margin-left: 3%;
+    }
 }
