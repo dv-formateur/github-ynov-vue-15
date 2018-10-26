@@ -74,7 +74,6 @@
             </div>
             <div>
                 <div>
-                    <h1 class="text-center">Derniers commits {{repository.name}}</h1>
                     <template v-for="branch in branches">
                         <input type="radio" :value="branch" name="branch" v-model="currentBranch">
                         <label :for="branch">{{ branch }}</label>
